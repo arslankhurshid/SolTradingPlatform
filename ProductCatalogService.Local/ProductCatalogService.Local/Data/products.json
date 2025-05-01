@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Solar Panel Basic",
+    "price": 499.99,
+    "description": "Basic solar panel for small installations"
+  },
+  {
+    "id": 2,
+    "name": "Inverter Pro 3000",
+    "price": 899.50,
+    "description": "High-efficiency inverter for home use"
+  }
+]

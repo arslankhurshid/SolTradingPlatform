@@ -1,0 +1,6 @@
+@ProductCatalogService.FTP_HostAddress = http://localhost:5216
+
+GET {{ProductCatalogService.FTP_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

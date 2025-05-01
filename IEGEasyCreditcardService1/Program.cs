@@ -1,5 +1,7 @@
 
-namespace MeiShop
+using IEGEasyCreditcardService.Services;
+
+namespace IEGEasyCreditcardService
 {
     public class Program
     {
@@ -10,11 +12,13 @@ namespace MeiShop
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddHttpClient(); // @arslan this added to make http call work
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<ICreditcardValidator, CreditcardValidator>();
+
+            builder.WebHost.UseUrls("http://localhost:6001");
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

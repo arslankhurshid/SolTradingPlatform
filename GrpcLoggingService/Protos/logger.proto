@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcLoggingService";
+
+service LogService {
+  rpc LogError (LogRequest) returns (LogResponse);
+}
+
+message LogRequest {
+  string source = 1;
+  string message = 2;
+  string timestamp = 3;
+}
+
+message LogResponse {
+  bool success = 1;
+}

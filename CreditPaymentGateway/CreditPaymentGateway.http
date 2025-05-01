@@ -1,0 +1,6 @@
+@CreditPaymentGateway_HostAddress = http://localhost:5241
+
+GET {{CreditPaymentGateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
