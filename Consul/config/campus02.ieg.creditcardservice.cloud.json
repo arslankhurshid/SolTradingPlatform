@@ -1,0 +1,6 @@
+{
+"service":{"name": "campus02.ieg.creditcardTransaction.cloud",
+"Address": "http://iegeasycreditcardservice.azurewebsites.net/",
+"tags": ["CreditCard","Transaction"],"port": 80
+	}
+}

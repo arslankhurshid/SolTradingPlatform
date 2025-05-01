@@ -1,0 +1,13 @@
+{
+"service":{"name": "campus02.ieg2023.creditcardTransaction.local",
+"Address": "http://localhostDemo4",
+"tags": ["CreditCard","Transaction"],"port": 56093,
+"check":	 {
+    "id": "HealthCheckCreditCardService",
+    "name": "HTTP API on port 44347",
+    "http": "https://localhost:44347/api/Healthcheck",  
+    "interval": "10s",
+    "timeout": "1s"
+  		}
+	}
+}

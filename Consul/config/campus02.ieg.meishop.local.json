@@ -1,0 +1,6 @@
+{
+"service":{"name": "campus02.ieg.meishop.local",
+"Address": "http://localhost",
+"tags": ["MeiShop","Product","Payment"],"port": 55983
+	}
+}
