@@ -1,10 +1,81 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "PaymentService";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<div>
+    <h1 class="display-4">PaymentService</h1>
+    <p>Dieses Service ermöglicht das Speichern und Abrufen von Zahlungsinformationen in verschiedenen Formaten (JSON, XML, CSV) über eine REST-API.</p>
+
+    <br />
+    <h2>Verfügbare Endpunkte</h2>
+    <table>
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th>Methode</th>
+                <th>Pfad</th>
+                <th style="width:50%">Beschreibung</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>GET</td>
+                <td>/api/payment</td>
+                <td>
+                    <p>Gibt alle Zahlungen zurück. Das Format der Antwort wird über den <code>Accept</code>-Header bestimmt (<code>application/json</code>, <code>application/xml</code>, <code>text/csv</code>).</p>
+                    <p><a href="https://prnt.sc/-TTIQ7miV6q4">[Beispiel]</a></p>
+                </td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/api/payment</td>
+                <td>
+                    <p>Speichert eine neue Zahlung. Das Datenformat muss über den <code>Content-Type</code>-Header angegeben werden (<code>application/json</code>, <code>application/xml</code>, <code>text/csv</code>).</p>
+                    <p><a href="https://prnt.sc/9n2zGA4fCMjB">[Beispiel JSON]</a></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+    <h2>Beispiele für Request Body (POST)</h2>
+    <table style="width:75%; margin:auto; border-collapse: collapse" >
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th>JSON</th>
+                <th>XML</th>
+                <th>CSV</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="vertical-align: top; padding: 10px;">
+                    <pre><code class="json">{
+  "Amount": 23.50,
+  "Currency": "EUR",
+  "Receiver": "Testi GmbH"
+}</code></pre>
+                </td>
+                <td style="vertical-align: top; padding: 10px;">
+                    <pre><code class="xml">&lt;Payment&gt;
+  &lt;Amount&gt;23.50&lt;/Amount&gt;
+  &lt;Currency&gt;EUR&lt;/Currency&gt;
+  &lt;Receiver&gt;Testi GmbH&lt;/Receiver&gt;
+&lt;/Payment&gt;</code></pre>
+                </td>
+                <td style="vertical-align: top; padding: 10px;">
+                    <pre><code class="csv">Amount,Currency,Receiver
+23.50,EUR,Testi GmbH</code></pre>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
 </div>
