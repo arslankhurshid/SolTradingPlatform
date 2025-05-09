@@ -79,6 +79,45 @@ app.MapGet("/api/payment", (HttpRequest request) =>
     return Results.StatusCode(406); // Not Acceptable: Nicht zulässiges Format
 });
 
+// GET-by-ID-Endpunkt
+app.MapGet("/api/payment/{id:int}", (HttpRequest request, int id) =>
+{
+    var payment = payments.FirstOrDefault(p => p.Id == id);
+    if (payment == null)
+    {
+        logger.LogWarning("Payment mit ID {Id} nicht gefunden.", id);
+        return Results.NotFound(new { message = $"Payment mit ID {id} nicht gefunden." });
+    }
+
+    var accept = request.Headers["Accept"].ToString().ToLower();
+    logger.LogInformation("GET /api/payment/{id} aufgerufen mit Accept: {AcceptHeader}",id, accept);
+
+    if (accept.Contains("application/xml"))
+    {
+        var serializer = new XmlSerializer(typeof(PaymentServiceCSV.Payment));
+        using var stringWriter = new StringWriter();
+        serializer.Serialize(stringWriter, payment);
+        return Results.Content(stringWriter.ToString(), "application/xml");
+    }
+    else if (accept.Contains("text/csv"))
+    {
+        using var sw = new StringWriter();
+        using var csv = new CsvWriter(sw, CultureInfo.InvariantCulture);
+        csv.WriteHeader<PaymentServiceCSV.Payment>();
+        csv.NextRecord();
+        csv.WriteRecord(payment);
+        return Results.File(Encoding.UTF8.GetBytes(sw.ToString()), "text/csv", $"payment_{id}.csv");
+    }
+    else if (accept.Contains("application/json"))
+    {
+        return Results.Json(payment);
+    }
+
+    logger.LogWarning("Nicht unterstütztes Accept-Format: {AcceptHeader}", accept);
+    return Results.StatusCode(406); // Not Acceptable
+});
+
+
 // POST-Endpunkt
 app.MapPost("/api/payment", async (HttpRequest request) =>
 {
@@ -130,6 +169,70 @@ app.MapPost("/api/payment", async (HttpRequest request) =>
     // Erfolgreiche Rückgabe (zurück als JSON)
     return Results.Json(new { message = "Received", data = payment });
 });
+
+
+// PUT-Endpunkt
+app.MapPut("/api/payment/{id:int}", async (HttpRequest request, int id) =>
+{
+    var existing = payments.FirstOrDefault(p => p.Id == id);
+    if (existing == null)
+    {
+        logger.LogWarning("PUT /api/payment/{id} – Payment mit ID {id} nicht gefunden.", id, id);
+        return Results.NotFound(new { message = $"Payment mit ID {id} nicht gefunden." });
+    }
+
+    var contentType = request.ContentType?.ToLower();
+    logger.LogInformation("PUT /api/payment/{id} aufgerufen mit Content-Type: {ContentType}", id, contentType);
+
+    using var reader = new StreamReader(request.Body);
+    PaymentServiceCSV.Payment updatedPayment;
+
+    if (contentType?.Contains("application/xml") == true)
+    {
+        var serializer = new XmlSerializer(typeof(PaymentServiceCSV.Payment));
+        updatedPayment = (PaymentServiceCSV.Payment)serializer.Deserialize(reader)!;
+    }
+    else if (contentType?.Contains("text/csv") == true)
+    {
+        using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+        updatedPayment = csv.GetRecords<PaymentServiceCSV.Payment>().First();
+    }
+    else if (contentType?.Contains("application/json") == true)
+    {
+        var body = await reader.ReadToEndAsync();
+        updatedPayment = System.Text.Json.JsonSerializer.Deserialize<PaymentServiceCSV.Payment>(body)!;
+    }
+    else
+    {
+        logger.LogWarning("PUT /api/payment/{id} – Nicht unterstützter Content-Type: {ContentType}", contentType);
+        return Results.StatusCode(406); // Not Acceptable
+    }
+
+    // Bestehendes Objekt aktualisieren
+    updatedPayment.Id = id; // ID beibehalten
+    var index = payments.FindIndex(p => p.Id == id);
+    payments[index] = updatedPayment;
+
+    logger.LogInformation("Payment mit ID {Id} erfolgreich aktualisiert.", id);
+    return Results.Json(new { message = "Updated", data = updatedPayment });
+});
+
+
+// DELETE-Endpunkt
+app.MapDelete("/api/payment/{id:int}", (int id) =>
+{
+    var payment = payments.FirstOrDefault(p => p.Id == id);
+    if (payment == null)
+    {
+        logger.LogWarning("DELETE /api/payment/{id} – Payment mit ID {d} nicht gefunden.", id, id);
+        return Results.NotFound(new { message = $"Payment mit ID {id} nicht gefunden." });
+    }
+
+    payments.Remove(payment);
+    logger.LogInformation("Payment mit ID {Id} erfolgreich gelöscht.", id);
+    return Results.Json(new { message = $"Payment mit ID {id} gelöscht." });
+});
+
 
 app.Run();
 

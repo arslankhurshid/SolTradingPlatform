@@ -34,11 +34,32 @@
                 </td>
             </tr>
             <tr>
+                <td>GET</td>
+                <td>/api/payment/{id}</td>
+                <td>
+                    <p>Gibt eine einzelne Zahlung anhand ihrer ID zurück. Das Format der Antwort richtet sich nach dem <code>Accept</code>-Header (<code>application/json</code>, <code>application/xml</code>, <code>text/csv</code>).</p>
+                </td>
+            </tr>
+            <tr>
                 <td>POST</td>
                 <td>/api/payment</td>
                 <td>
                     <p>Speichert eine neue Zahlung. Das Datenformat muss über den <code>Content-Type</code>-Header angegeben werden (<code>application/json</code>, <code>application/xml</code>, <code>text/csv</code>).</p>
                     <p><a href="https://prnt.sc/9n2zGA4fCMjB">[Beispiel JSON]</a></p>
+                </td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td>/api/payment/{id}</td>
+                <td>
+                    <p>Aktualisiert eine bestehende Zahlung mit der angegebenen ID. Das Format der Daten wird durch den <code>Content-Type</code>-Header bestimmt (<code>application/json</code>, <code>application/xml</code>, <code>text/csv</code>).</p>
+                </td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td>/api/payment/{id}</td>
+                <td>
+                    <p>Löscht die Zahlung mit der angegebenen ID dauerhaft.</p>
                 </td>
             </tr>
         </tbody>
