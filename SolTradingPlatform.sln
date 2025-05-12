@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalogService.Local
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebhookListenerService", "WebhookListenerService\WebhookListenerService.csproj", "{DC4F4AF2-083A-4E9B-ACD8-738A11F43554}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalProductService", "ExternalProductService\ExternalProductService.csproj", "{AFA952E0-9D07-4BB4-A428-CFFF9CE6CCB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{DC4F4AF2-083A-4E9B-ACD8-738A11F43554}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC4F4AF2-083A-4E9B-ACD8-738A11F43554}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC4F4AF2-083A-4E9B-ACD8-738A11F43554}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFA952E0-9D07-4BB4-A428-CFFF9CE6CCB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA952E0-9D07-4BB4-A428-CFFF9CE6CCB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA952E0-9D07-4BB4-A428-CFFF9CE6CCB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA952E0-9D07-4BB4-A428-CFFF9CE6CCB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
