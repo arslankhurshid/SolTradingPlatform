@@ -8,12 +8,23 @@
     tr:nth-child(even) {
         background-color: #f2f2f2;
     }
+
+    tr {
+        height: 40px;
+    }
+
+    td, th {
+        padding: 8px 12px;
+        vertical-align: middle;
+    }
 </style>
+
 
 <div>
     <h1 class="display-4">PaymentService</h1>
     <p>Dieses Service ermöglicht das Speichern und Abrufen von Zahlungsinformationen in verschiedenen Formaten (JSON, XML, CSV) über eine REST-API.</p>
-
+    <br />
+    <p><strong>Base-URL:</strong> <code>http://localhost:5042</code></p>
     <br />
     <h2>Verfügbare Endpunkte</h2>
     <table>
