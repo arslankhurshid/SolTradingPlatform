@@ -1,6 +1,0 @@
-@WebhookListenerService_HostAddress = http://localhost:5299
-
-GET {{WebhookListenerService_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
