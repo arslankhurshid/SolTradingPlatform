@@ -5,18 +5,42 @@
 }
 
 <style>
-    tr:nth-child(even) {
+    #endpoints tr:nth-child(even) {
         background-color: #f2f2f2;
     }
 
-    tr {
+   #endpoints tr {
         height: 40px; 
     }
 
-    td, th {
+   #endpoints td, th {
         padding: 8px 12px; 
         vertical-align: middle;
     }
+
+    #objectDiagram {
+        border-collapse: collapse; 
+        margin-bottom: 20px; 
+        width: 150px; 
+        text-align: left;
+    }
+
+    #objectDiagram th {
+        border: 1px solid black; 
+        background-color: #f2f2f2; 
+        font-weight: bold; 
+        text-align: center;
+	}
+
+	#objectDiagram tbody {
+         border: 1px solid black; 
+         padding: 4px;
+	}
+
+	#objectDiagram td {
+		padding: 4px;
+	}
+
 </style>
 
 <div>
@@ -26,7 +50,7 @@
     <p><strong>Base-URL:</strong> <code>http://localhost:5180</code></p>
     <br />
     <h2>Verfügbare Endpunkte</h2>
-    <table>
+    <table id="endpoints">
         <thead>
             <tr style="background-color: #f2f2f2;">
                 <th>Methode</th>
@@ -74,6 +98,25 @@
                 <td>GET</td>
                 <td><code>/odata/Products/$count</code></td>
                 <td>Gibt die Anzahl der Produkte zurück (Anzahl als Zahl).</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <table id="objectDiagram">
+        <thead>
+            <tr>
+                <th>Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Id: int</td>
+            </tr>
+            <tr>
+                <td>Name: string</td>
+            </tr>
+            <tr>
+                <td>Price: double</td>
             </tr>
         </tbody>
     </table>
