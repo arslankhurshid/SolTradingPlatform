@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml.Serialization;
 using CsvHelper;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Azure.Management.Fluent;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -232,6 +233,25 @@ app.MapDelete("/api/payment/{id:int}", (int id) =>
     logger.LogInformation("Payment mit ID {Id} erfolgreich gelöscht.", id);
     return Results.Json(new { message = $"Payment mit ID {id} gelöscht." });
 });
+
+
+/*
+ * ----------------------------------------------
+ * SECRETS:
+ * ----------------------------------------------
+ */
+
+app.MapGet("/api/payment/secret", (HttpRequest request) =>
+{
+    var path = "/app/secrets/payment-api-key.txt";
+
+    if (!System.IO.File.Exists(path))
+        return Results.Problem("Secret-File konnte nicht gefunden werden.");
+
+    var key = System.IO.File.ReadAllText(path);
+    return Results.Ok(new { apiKey = key });
+});
+
 
 
 app.Run();
