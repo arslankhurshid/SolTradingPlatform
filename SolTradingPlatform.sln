@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaymentService", "PaymentSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODataProductService", "ODataProductService\ODataProductService.csproj", "{F05660C9-6E8C-4CB1-B541-F36373921515}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncMessaging", "AsyncMessaging\AsyncMessaging.csproj", "{5DF6AE54-85C6-4E8E-AE60-65F008831C76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{F05660C9-6E8C-4CB1-B541-F36373921515}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F05660C9-6E8C-4CB1-B541-F36373921515}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F05660C9-6E8C-4CB1-B541-F36373921515}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DF6AE54-85C6-4E8E-AE60-65F008831C76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DF6AE54-85C6-4E8E-AE60-65F008831C76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DF6AE54-85C6-4E8E-AE60-65F008831C76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DF6AE54-85C6-4E8E-AE60-65F008831C76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

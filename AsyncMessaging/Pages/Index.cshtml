@@ -1,0 +1,110 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Async Messaging Service";
+}
+
+<style>
+    #queueform {
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    #queueform label {
+        display: inline-block;
+        width: 120px;
+        font-weight: bold;
+    }
+
+    #queueform input[type="text"] {
+        width: 300px;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    #queueform button {
+        padding: 8px 16px;
+        background-color: #0078d4;
+        color: white;
+        border: none;
+        border-radius: 4px;
+    }
+
+    #queueform button:hover {
+        background-color: #005fa1;
+    }
+
+    .status-message {
+        color: green;
+        margin-top: 10px;
+    }
+
+    table#objectDiagram {
+        border-collapse: collapse;
+        width: 200px;
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    table#objectDiagram th {
+        background-color: #f2f2f2;
+        border: 1px solid black;
+        font-weight: bold;
+        text-align: center;
+        padding: 5px;
+    }
+
+    table#objectDiagram td {
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    a {
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+</style>
+
+<div>
+    <h1 class="display-4">Asynchrones Messaging via Azure Service Bus</h1>
+    <p>Dieses Microservice sendet Nachrichten asynchron über eine Azure Service Bus Queue.</p>
+
+    <p><strong>Queue:</strong> <code>@Model.QueueName</code></p>
+    <p><strong>Format:</strong> <code>JSON (application/json)</code></p>
+
+    <hr />
+
+    <h2>Nachricht an die Queue senden</h2>
+    <form method="post" id="queueform">
+        <label for="User">Benutzername:</label>
+        <input type="text" name="User" required /><br />
+
+        <label for="Text">Nachricht:</label>
+        <input type="text" name="Text" required /><br />
+
+        <button type="submit">Senden</button>
+    </form>
+
+    @if (Model.StatusMessage != null)
+    {
+        <p class="status-message">@Model.StatusMessage</p>
+    }
+
+    <hr />
+    <h2>Hinweise</h2>
+    <p>
+        Die gesendeten Nachrichten können direkt im <strong>Azure Portal</strong> eingesehen werden:<br />
+        <a href="https://tinyurl.com/yva4kzup" target="_blank">
+             <!--https://portal.azure.com/#@@educampus02.onmicrosoft.com/resource/subscriptions/3449334d-e477-450a-868a-01858883c134/resourceGroups/ieg_mostWanTED/providers/Microsoft.ServiceBus/namespaces/mostwantedBus/queues/mostwantedqueue/overview-->
+           
+            Azure Queue: mostwantedqueue (Link)
+        </a>
+    </p>
+
+    <p>Zusätzlich wird der Output der Nachricht in der <strong>Konsole der Anwendung</strong> protokolliert.</p>
+</div>
