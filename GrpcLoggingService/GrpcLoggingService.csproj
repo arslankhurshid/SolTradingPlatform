@@ -16,7 +16,7 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2"/>
     </ItemGroup>
     <ItemGroup>
-        <Protobuf Include="Protos\logger.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos/logger.proto" GrpcServices="Server" />
     </ItemGroup>
 
 </Project>

@@ -17,8 +17,10 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
     </ItemGroup>
+
     <ItemGroup>
-      <Protobuf Include="Protos\logger.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\payment.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\logger.proto" GrpcServices="Client" />
     </ItemGroup>
 
 </Project>

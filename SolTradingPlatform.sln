@@ -7,10 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeiShop", "MeiShop\MeiShop.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IEGEasyCreditcardService", "IEGEasyCreditcardService\IEGEasyCreditcardService.csproj", "{9E6ED9F0-D1FE-4377-9D26-7CEAB07E2D95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEGEasyCreditcardService1", "..\..\..\..\Users\khursma\RiderProjects\IEGEasyCreditcardService1\IEGEasyCreditcardService1.csproj", "{5241E962-3516-4B07-B729-BD67A9429E9D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEGEasyCreditcardService2", "..\..\..\..\Users\khursma\RiderProjects\IEGEasyCreditcardService2\IEGEasyCreditcardService2.csproj", "{274D2557-8D0E-4E85-8A15-7FAA300E0418}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditPaymentGateway", "CreditPaymentGateway\CreditPaymentGateway.csproj", "{B8898D4F-B993-4EFF-8053-D35DD7E8DD1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcLoggingService", "GrpcLoggingService\GrpcLoggingService.csproj", "{E3BA75CF-5BFC-4120-BEB0-40035B9C54C5}"
@@ -18,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalogService.FTP", "..\..\..\..\Users\khursma\RiderProjects\ProductCatalogService.FTP\ProductCatalogService.FTP\ProductCatalogService.FTP.csproj", "{ED70A39E-5E99-4914-98DD-4F8917CF099A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalogService.Local", "..\..\..\..\Users\khursma\RiderProjects\ProductCatalogService.Local\ProductCatalogService.Local\ProductCatalogService.Local.csproj", "{9A8B7F48-86A1-4846-BB2F-62DBC54EAAB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEGEasyCreditcardService2", "IEGEasyCreditcardService2\IEGEasyCreditcardService2.csproj", "{B91B1CE1-3797-4049-A1BB-E88FFB7B5803}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEGEasyCreditcardService1", "IEGEasyCreditcardService1\IEGEasyCreditcardService1.csproj", "{B571B2EE-B3A6-4DB0-98B2-E32131B40C2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,14 +33,6 @@ Global
 		{9E6ED9F0-D1FE-4377-9D26-7CEAB07E2D95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E6ED9F0-D1FE-4377-9D26-7CEAB07E2D95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E6ED9F0-D1FE-4377-9D26-7CEAB07E2D95}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5241E962-3516-4B07-B729-BD67A9429E9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5241E962-3516-4B07-B729-BD67A9429E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5241E962-3516-4B07-B729-BD67A9429E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5241E962-3516-4B07-B729-BD67A9429E9D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{274D2557-8D0E-4E85-8A15-7FAA300E0418}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{274D2557-8D0E-4E85-8A15-7FAA300E0418}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{274D2557-8D0E-4E85-8A15-7FAA300E0418}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{274D2557-8D0E-4E85-8A15-7FAA300E0418}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8898D4F-B993-4EFF-8053-D35DD7E8DD1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B8898D4F-B993-4EFF-8053-D35DD7E8DD1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8898D4F-B993-4EFF-8053-D35DD7E8DD1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +49,14 @@ Global
 		{9A8B7F48-86A1-4846-BB2F-62DBC54EAAB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A8B7F48-86A1-4846-BB2F-62DBC54EAAB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A8B7F48-86A1-4846-BB2F-62DBC54EAAB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B91B1CE1-3797-4049-A1BB-E88FFB7B5803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B91B1CE1-3797-4049-A1BB-E88FFB7B5803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B91B1CE1-3797-4049-A1BB-E88FFB7B5803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B91B1CE1-3797-4049-A1BB-E88FFB7B5803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B571B2EE-B3A6-4DB0-98B2-E32131B40C2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B571B2EE-B3A6-4DB0-98B2-E32131B40C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B571B2EE-B3A6-4DB0-98B2-E32131B40C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B571B2EE-B3A6-4DB0-98B2-E32131B40C2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

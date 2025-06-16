@@ -1,41 +1,34 @@
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using EasyCreditPaymentService; // From your payment.proto
 
-using IEGEasyCreditcardService.Services;
+var builder = WebApplication.CreateBuilder(args);
 
-namespace IEGEasyCreditcardService
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+// Add gRPC services
+builder.Services.AddGrpc(options => {
+    options.EnableDetailedErrors = true;
+    options.MaxReceiveMessageSize = 2 * 1024 * 1024; // 2MB
+});
 
-            // Add services to the container.
+builder.Services.AddLogging(logging => {
+    logging.AddConsole();
+    logging.SetMinimumLevel(LogLevel.Debug);
+});
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+// Configure HTTP/2
+builder.WebHost.ConfigureKestrel(options => {
+    options.ListenLocalhost(6001, listenOptions => {
+        listenOptions.Protocols = HttpProtocols.Http2;
+        Console.WriteLine("Payment Service 1: HTTP/2 enabled on port 6001");
+    });
+});
 
-            builder.Services.AddScoped<ICreditcardValidator, CreditcardValidator>();
+var app = builder.Build();
 
-            builder.WebHost.UseUrls("http://localhost:6001");
-            var app = builder.Build();
+// Configure middleware
+app.UseRouting();
 
-            // Configure the HTTP request pipeline.
-           // if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+// Map gRPC service
+app.MapGrpcService<EasyCreditPaymentServiceImpl>();
+app.MapGet("/", () => "Payment Service 1 (gRPC/HTTP2) is running");
 
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
-        }
-    }
-}
+app.Run();
