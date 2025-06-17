@@ -1,0 +1,19 @@
+{
+  "service": {
+    "name": "recommendation-service",
+    "id": "recommendation-service-02", 
+    "tags": [ "mostwanted", "recommendations", "v1" ],
+    "address": "localhost",
+    "port": 5002, 
+    "checks": [
+      {
+        "id": "health-instance2-http",
+        "name": "Recommendation Service HTTP Health Check on port 5002",
+        "http": "http://localhost:5002/health",
+        "method": "GET",
+        "interval": "10s",
+        "timeout": "1s"
+      }
+    ]
+  }
+}
