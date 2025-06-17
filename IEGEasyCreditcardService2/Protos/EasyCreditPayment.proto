@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "EasyCreditPaymentService";
+
+package easycredit;
+
+// Define service
+service EasyCreditPaymentService {
+  rpc ProcessPayment (CreditCardPaymentRequest) returns (CreditCardPaymentResponse);
+}
+
+message CreditCardPaymentRequest {
+  string card_number = 1;
+  string card_holder = 2;
+  string expiry = 3;
+}
+
+message CreditCardPaymentResponse {
+  bool success = 1;
+}

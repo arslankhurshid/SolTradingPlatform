@@ -1,0 +1,16 @@
+﻿syntax = "proto3";
+option csharp_namespace = "EasyCreditPaymentService"; // Critical for C# code
+
+service EasyCreditPaymentService {
+  rpc ProcessPayment (CreditCardPaymentRequest) returns (CreditCardPaymentResponse);
+}
+
+message CreditCardPaymentRequest {
+  string card_number = 1;
+  string card_holder = 2;
+  string expiration = 3;
+}
+
+message CreditCardPaymentResponse {
+  bool success = 1;
+}
