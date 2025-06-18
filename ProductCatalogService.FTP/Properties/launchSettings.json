@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ProductCatalogService.FTP": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:61042;http://localhost:61045"
+    }
+  }
+}
