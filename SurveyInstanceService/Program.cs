@@ -47,6 +47,13 @@ builder.Services.AddSingleton<IConsulClient>(sp =>
 builder.Services.AddHttpClient("RecommendationServiceHttpClient");
 builder.Services.AddScoped<IRecommendationServiceClient, RecommendationServiceClient>();
 
+// Registrierung für den neuen SurveyDefinitionServiceClient
+builder.Services.AddHttpClient<ISurveyDefinitionServiceClient, SurveyDefinitionServiceClient>(client =>
+{
+    // HIER EINE FESTE URL FÜR DAS LOKALE BEISPIEL.
+    // IN EINER ECHTEN ANWENDUNG WÜRDE HIER SERVICE DISCOVERY ZUM EINSATZ KOMMEN!
+    client.BaseAddress = new Uri("http://localhost:5013"); // Port des SurveyDefinitionService
+});
 
 var centralConsulConfigAddress = builder.Configuration.GetValue<string>("Consul:HttpAddress"); // Könnte derselbe sein
 var centralConsulKeyPath = "config/mostwanted/surveyinstanceservice"; // Eigener Pfad für diesen Service

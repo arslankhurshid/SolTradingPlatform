@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using SurveyInstanceService.Services; // Stellt sicher, dass dieser Namespace IRecommendationServiceClient und RecommendationApiResponse enthält
+using SurveyInstanceService.Services;
+using System;
 using System.Threading.Tasks;
+using MostWanted.Models;
 
 namespace SurveyInstanceService.Controllers
 {
@@ -11,15 +13,18 @@ namespace SurveyInstanceService.Controllers
     public class SurveyInstanceController : ControllerBase
     {
         private readonly IRecommendationServiceClient _recommendationClient;
+        private readonly ISurveyDefinitionServiceClient _surveyDefinitionClient;
         private readonly ILogger<SurveyInstanceController> _logger;
         private readonly IConfiguration _configuration;
 
         public SurveyInstanceController(
             IRecommendationServiceClient recommendationClient,
+            ISurveyDefinitionServiceClient surveyDefinitionClient,
             ILogger<SurveyInstanceController> logger,
             IConfiguration configuration)
         {
             _recommendationClient = recommendationClient;
+            _surveyDefinitionClient = surveyDefinitionClient;
             _logger = logger;
             _configuration = configuration;
         }
@@ -27,40 +32,56 @@ namespace SurveyInstanceService.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateSurveyInstance([FromBody] SurveyInstanceCreationRequest request)
         {
-            if (request == null || string.IsNullOrEmpty(request.SegmentId))
+            if (request == null || request.QuestionnaireId == Guid.Empty)
             {
-                _logger.LogWarning("Invalid request received for CreateSurveyInstance: SegmentId is missing.");
-                return BadRequest("SegmentId is required.");
+                _logger.LogWarning("Invalid request: QuestionnaireId is required.");
+                return BadRequest("QuestionnaireId is required.");
             }
 
-            var centralConfigValue = _configuration.GetValue<string>("SurveyInstanceService:Greeting", "Default Greeting for SurveyInstance");
-            _logger.LogInformation("Creating survey instance for segment: {SegmentId}. Central Config Greeting: {Greeting}", request.SegmentId, centralConfigValue);
+            _logger.LogInformation("Processing request to create instance for Questionnaire ID: {QuestionnaireId} and Segment: {SegmentId}",
+                request.QuestionnaireId, request.SegmentId);
 
-            RecommendationApiResponse? recommendationData = // Verwende hier den korrekten Typ
-                await _recommendationClient.GetRecommendationsForSegmentAsync(request.SegmentId);
+            var questionnaire = await _surveyDefinitionClient.GetQuestionnaireByIdAsync(request.QuestionnaireId);
+            if (questionnaire == null)
+            {
+                _logger.LogWarning("Questionnaire with ID {QuestionnaireId} not found via SurveyDefinitionService.", request.QuestionnaireId);
+                return NotFound($"The questionnaire with ID {request.QuestionnaireId} could not be found.");
+            }
 
-            if (recommendationData != null && recommendationData.Recommendations != null)
+            RecommendationApiResponse? recommendationData = null;
+            if (!string.IsNullOrEmpty(request.SegmentId))
             {
-                _logger.LogInformation("Obtained {Count} recommendations for the new survey instance for segment {SegmentId}.", recommendationData.Recommendations.Count, request.SegmentId);
+                recommendationData = await _recommendationClient.GetRecommendationsForSegmentAsync(request.SegmentId);
+                if (recommendationData != null && recommendationData.Recommendations != null)
+                {
+                    _logger.LogInformation("Obtained {Count} recommendations for the new survey instance.", recommendationData.Recommendations.Count);
+                }
+                else
+                {
+                    _logger.LogWarning("No recommendations were obtained for segment {SegmentId}.", request.SegmentId);
+                }
             }
-            else
-            {
-                _logger.LogWarning("No recommendations obtained for segment {SegmentId}.", request.SegmentId);
-            }
+
+            var serviceMessage = _configuration.GetValue<string>("SurveyInstanceService:Greeting", "SurveyInstanceService is running smoothly!");
 
             return Ok(new
             {
-                message = "Survey instance creation process initiated.",
-                segmentId = request.SegmentId,
-                obtainedRecommendations = recommendationData, // Hier das GANZE Objekt verwenden!
-                serviceMessage = centralConfigValue
+                message = $"Instance creation process initiated for questionnaire '{questionnaire.Title}'.",
+                instanceData = new
+                {
+                    questionnaireId = request.QuestionnaireId,
+                    segmentId = request.SegmentId,
+                    totalQuestions = questionnaire.Questions.Count
+                },
+                obtainedRecommendations = recommendationData,
+                serviceMessage = serviceMessage
             });
         }
     }
 
     public class SurveyInstanceCreationRequest
     {
+        public Guid QuestionnaireId { get; set; }
         public string? SegmentId { get; set; }
-        // Weitere Eigenschaften für die Erstellung einer Survey-Instanz
     }
 }
