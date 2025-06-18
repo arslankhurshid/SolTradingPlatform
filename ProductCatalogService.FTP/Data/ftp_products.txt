@@ -1,0 +1,52 @@
+[
+  {
+    "Id": "1",
+    "Name": "Laptop Pro X1",
+    "Description": "High-performance laptop with 16GB RAM and 512GB SSD",
+    "Price": 1299.99,
+    "StockQuantity": 50,
+    "Category": "Electronics",
+    "CreatedAt": "2024-06-18T00:00:00Z",
+    "UpdatedAt": "2024-06-18T00:00:00Z"
+  },
+  {
+    "Id": "2",
+    "Name": "Wireless Mouse",
+    "Description": "Ergonomic wireless mouse with long battery life",
+    "Price": 29.99,
+    "StockQuantity": 200,
+    "Category": "Accessories",
+    "CreatedAt": "2024-06-18T00:00:00Z",
+    "UpdatedAt": "2024-06-18T00:00:00Z"
+  },
+  {
+    "Id": "3",
+    "Name": "4K Monitor",
+    "Description": "27-inch 4K UHD monitor with HDR support",
+    "Price": 399.99,
+    "StockQuantity": 75,
+    "Category": "Electronics",
+    "CreatedAt": "2024-06-18T00:00:00Z",
+    "UpdatedAt": "2024-06-18T00:00:00Z"
+  },
+  {
+    "Id": "4",
+    "Name": "Mechanical Keyboard",
+    "Description": "RGB mechanical keyboard with blue switches",
+    "Price": 89.99,
+    "StockQuantity": 150,
+    "Category": "Accessories",
+    "CreatedAt": "2024-06-18T00:00:00Z",
+    "UpdatedAt": "2024-06-18T00:00:00Z"
+  },
+  {
+    "Id": "5",
+    "Name": "Gaming Headset",
+    "Description": "7.1 surround sound gaming headset with noise cancellation",
+    "Price": 79.99,
+    "StockQuantity": 100,
+    "Category": "Audio",
+    "CreatedAt": "2024-06-18T00:00:00Z",
+    "UpdatedAt": "2024-06-18T00:00:00Z"
+  }
+] 

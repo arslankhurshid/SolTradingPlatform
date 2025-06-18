@@ -10,10 +10,14 @@ namespace MeiShop.Controllers
     public class ProductListController : ControllerBase
     {
         private readonly HttpClient _httpClient;
+        private readonly ILogger<ProductListController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public ProductListController(IHttpClientFactory httpClientFactory)
+        public ProductListController(IHttpClientFactory httpClientFactory, ILogger<ProductListController> logger, IConfiguration configuration)
         {
             _httpClient = httpClientFactory.CreateClient();
+            _logger = logger;
+            _configuration = configuration;
         }
 
         [HttpGet]
@@ -21,7 +25,27 @@ namespace MeiShop.Controllers
         {
             try
             {
-                var response = await _httpClient.GetAsync("http://localhost:5216/api/product");
+                // Get products from both services
+                var localProducts = await GetProductsFromService("LocalProductService");
+                var ftpProducts = await GetProductsFromService("FtpProductService");
+
+                // Combine and return all products
+                var allProducts = localProducts.Concat(ftpProducts);
+                return Ok(allProducts);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch products from services");
+                return StatusCode(500, $"Failed to fetch products: {ex.Message}");
+            }
+        }
+
+        private async Task<IEnumerable<Product>> GetProductsFromService(string serviceName)
+        {
+            try
+            {
+                var baseUrl = _configuration[$"Services:{serviceName}:BaseUrl"];
+                var response = await _httpClient.GetAsync($"{baseUrl}/api/products");
                 response.EnsureSuccessStatusCode();
 
                 var json = await response.Content.ReadAsStringAsync();
@@ -30,11 +54,12 @@ namespace MeiShop.Controllers
                     PropertyNameCaseInsensitive = true
                 });
 
-                return Ok(products);
+                return products ?? new List<Product>();
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Failed to fetch products: {ex.Message}");
+                _logger.LogError(ex, "Failed to fetch products from {ServiceName}", serviceName);
+                return new List<Product>();
             }
         }
     }

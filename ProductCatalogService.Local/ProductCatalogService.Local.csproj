@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\appsettings.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\bin\Debug\net9.0\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\bin\Debug\net9.0\appsettings.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\bin\Debug\net9.0\Data\products.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\bin\Debug\net9.0\ProductCatalogService.Local.deps.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\bin\Debug\net9.0\ProductCatalogService.Local.runtimeconfig.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\bin\Debug\net9.0\ProductCatalogService.Local.staticwebassets.endpoints.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\Data\products.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\obj\Debug\net9.0\staticwebassets.build.endpoints.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\obj\Debug\net9.0\staticwebassets.build.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\obj\ProductCatalogService.Local.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.Local\Properties\launchSettings.json" />
+  </ItemGroup>
+
+</Project> 
