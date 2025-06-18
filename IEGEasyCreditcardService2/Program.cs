@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 //using GrpcLoggingService.Services;
 using EasyCreditPaymentService; // From your payment.proto
+using IEGEasyCreditcardService2.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

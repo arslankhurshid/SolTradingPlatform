@@ -17,4 +17,5 @@ message CreditCardPaymentRequest {
 
 message CreditCardPaymentResponse {
   bool success = 1;
+  string transaction_id = 2;
 }

@@ -9,6 +9,7 @@
     <ItemGroup>
         <PackageReference Include="Google.Protobuf" Version="3.31.0-rc1" />
         <PackageReference Include="Grpc.AspNetCore" Version="2.71.0" />
+        <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.71.0" />
         <PackageReference Include="Grpc.Tools" Version="2.71.0">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,7 +17,7 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2"/>
     </ItemGroup>
     <ItemGroup>
-        <Protobuf Include="Protos/logger.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\logger.proto" GrpcServices="Server" />
     </ItemGroup>
 
 </Project>
