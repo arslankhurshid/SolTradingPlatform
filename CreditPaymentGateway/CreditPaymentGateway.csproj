@@ -17,8 +17,28 @@
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
     </ItemGroup>
+
     <ItemGroup>
-      <Protobuf Include="Protos\logger.proto" GrpcServices="Client" />
+        <ProjectReference Include="..\OrderService\OrderService.csproj" />
+        <ProjectReference Include="..\InventoryService\InventoryService.csproj" />
+        <ProjectReference Include="..\NotificationService\NotificationService.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf Include="Protos\payment.proto" GrpcServices="Client" />
+        <Protobuf Include="Protos\logger.proto" GrpcServices="Client" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Protobuf Include="..\OrderService\Protos\order.proto" GrpcServices="Client" ProtoRoot="..\OrderService\Protos" />
+        <Protobuf Include="..\InventoryService\Protos\inventory.proto" GrpcServices="Client" ProtoRoot="..\InventoryService\Protos" />
+        <Protobuf Include="..\NotificationService\Protos\notification.proto" GrpcServices="Client" ProtoRoot="..\NotificationService\Protos" />
+    </ItemGroup>
+
+    <Target Name="CopyProtoFiles" BeforeTargets="Build">
+        <Copy SourceFiles="..\OrderService\Protos\order.proto" DestinationFolder="$(MSBuildProjectDirectory)\Protos" />
+        <Copy SourceFiles="..\InventoryService\Protos\inventory.proto" DestinationFolder="$(MSBuildProjectDirectory)\Protos" />
+        <Copy SourceFiles="..\NotificationService\Protos\notification.proto" DestinationFolder="$(MSBuildProjectDirectory)\Protos" />
+    </Target>
 
 </Project>

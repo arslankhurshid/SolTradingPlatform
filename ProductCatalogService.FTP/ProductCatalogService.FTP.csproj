@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="FluentFTP" Version="46.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\appsettings.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\bin\Debug\net9.0\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\bin\Debug\net9.0\appsettings.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\bin\Debug\net9.0\ProductCatalogService.FTP.deps.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\bin\Debug\net9.0\ProductCatalogService.FTP.runtimeconfig.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\bin\Debug\net9.0\ProductCatalogService.FTP.staticwebassets.endpoints.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\obj\Debug\net9.0\staticwebassets.build.endpoints.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\obj\Debug\net9.0\staticwebassets.build.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\obj\ProductCatalogService.FTP.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="ProductCatalogService.FTP\Properties\launchSettings.json" />
+  </ItemGroup>
+
+</Project> 

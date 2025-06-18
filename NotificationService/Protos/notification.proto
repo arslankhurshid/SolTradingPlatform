@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "NotificationService";
+option go_package = "notification";
+
+package notificationservice;
+
+service NotificationService {
+  rpc SendNotification (NotificationRequest) returns (NotificationResponse);
+  rpc SendFailureNotification (FailureNotificationRequest) returns (NotificationResponse);
+}
+
+message NotificationRequest {
+  string recipient_id = 1;
+  NotificationType type = 2;
+  string message = 3;
+  map<string, string> metadata = 4;
+}
+
+enum NotificationType {
+  ORDER_CREATED = 0;
+  PAYMENT_CONFIRMED = 1;
+  ORDER_COMPLETED = 2;
+  ORDER_CANCELLED = 3;
+}
+
+message NotificationResponse {
+  bool success = 1;
+  string message = 2;
+  string notification_id = 3;
+}
+
+message FailureNotificationRequest {
+  string recipient_id = 1;
+  string error_message = 2;
+  string transaction_id = 3;
+  string service_name = 4;
+  map<string, string> metadata = 5;
+} 

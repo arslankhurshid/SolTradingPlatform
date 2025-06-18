@@ -1,6 +1,9 @@
 using Grpc.Net.Client;
 using Grpc.Net.ClientFactory;
 using GrpcLoggingService;
+//using IEGEasyCreditcardService;
+//using EasyCreditPaymentService;
+
 //using LoggerGrpc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,17 +14,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 👇 Add gRPC client BEFORE builder.Build()
 AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
 
-builder.Services.AddGrpcClient<LogService.LogServiceClient>(o =>
+builder.Services.AddGrpcClient<LogService.LogServiceClient>(options =>
 {
-    o.Address = new Uri("http://localhost:5280"); // or the actual gRPC logging service URL
+    options.Address = new Uri("http://localhost:5280"); 
+}).ConfigurePrimaryHttpMessageHandler(() =>
+{
+    return new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    };
 });
 
 var app = builder.Build();
 
-// Use middlewares after building
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

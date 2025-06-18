@@ -1,42 +1,35 @@
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+//using GrpcLoggingService.Services;
+using EasyCreditPaymentService; // From your payment.proto
+using IEGEasyCreditcardService2.Services;
 
-using IEGEasyCreditcardService.Services;
+var builder = WebApplication.CreateBuilder(args);
 
-namespace IEGEasyCreditcardService
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+// Add gRPC services
+builder.Services.AddGrpc(options => {
+    options.EnableDetailedErrors = true;
+    options.MaxReceiveMessageSize = 2 * 1024 * 1024; // 2MB
+});
 
-            // Add services to the container.
+// Configure HTTP/2
+builder.WebHost.ConfigureKestrel(options => {
+    options.ListenLocalhost(6002, listenOptions => {
+        listenOptions.Protocols = HttpProtocols.Http2;
+        Console.WriteLine("Payment Service 2: HTTP/2 enabled on port 6002");
+    });
+});
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+var app = builder.Build();
+// Register the payment service
+/*app.MapGrpcService<EasyCreditPaymentServiceImpl>();*/
 
-            builder.Services.AddScoped<ICreditcardValidator, CreditcardValidator>();
+///app.MapGrpcService<GrpcLoggingService>();
 
-            builder.WebHost.UseUrls("http://localhost:6002");
+// Configure middleware
+app.UseRouting();
 
-            var app = builder.Build();
+// Map gRPC service
+app.MapGrpcService<EasyCreditPaymentServiceImpl>();
+app.MapGet("/", () => "Payment Service 2 (gRPC/HTTP2) is running");
 
-            // Configure the HTTP request pipeline.
-           // if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
-        }
-    }
-}
+app.Run();

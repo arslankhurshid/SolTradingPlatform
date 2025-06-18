@@ -1,0 +1,157 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "PaymentService";
+}
+
+<style>
+    #endpoints tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #endpoints tr {
+        height: 40px;
+    }
+
+    #endpoints td, th {
+        padding: 8px 12px;
+        vertical-align: middle;
+    }
+
+    #objectDiagram {
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        width: 150px;
+        text-align: left;
+    }
+
+    #objectDiagram th {
+        border: 1px solid black;
+        background-color: #f2f2f2;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    #objectDiagram tbody {
+        border: 1px solid black;
+        padding: 4px;
+    }
+
+    #objectDiagram td {
+        padding: 4px;
+    }
+</style>
+
+
+<div>
+    <h1 class="display-4">PaymentService</h1>
+    <p>Dieses Service ermöglicht das Speichern und Abrufen von Zahlungsinformationen in verschiedenen Formaten (JSON, XML, CSV) über eine REST-API.</p>
+    <br />
+    <p><strong>Base-URL:</strong> <code>http://localhost:5042</code></p>
+    <br />
+    <h2>Verfügbare Endpunkte</h2>
+    <table id="endpoints">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th>Methode</th>
+                <th>Pfad</th>
+                <th style="width:50%">Beschreibung</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>GET</td>
+                <td>/api/payment</td>
+                <td>
+                    <p>Gibt alle Zahlungen zurück. Das Format der Antwort wird über den <code>Accept</code>-Header bestimmt (<code>application/json</code>, <code>application/xml</code>, <code>text/csv</code>).</p>
+                    <p><a href="https://prnt.sc/-TTIQ7miV6q4">[Beispiel]</a></p>
+                </td>
+            </tr>
+            <tr>
+                <td>GET</td>
+                <td>/api/payment/{id}</td>
+                <td>
+                    <p>Gibt eine einzelne Zahlung anhand ihrer ID zurück. Das Format der Antwort richtet sich nach dem <code>Accept</code>-Header (<code>application/json</code>, <code>application/xml</code>, <code>text/csv</code>).</p>
+                </td>
+            </tr>
+            <tr>
+                <td>POST</td>
+                <td>/api/payment</td>
+                <td>
+                    <p>Speichert eine neue Zahlung. Das Datenformat muss über den <code>Content-Type</code>-Header angegeben werden (<code>application/json</code>, <code>application/xml</code>, <code>text/csv</code>).</p>
+                    <p><a href="https://prnt.sc/9n2zGA4fCMjB">[Beispiel JSON]</a></p>
+                </td>
+            </tr>
+            <tr>
+                <td>PUT</td>
+                <td>/api/payment/{id}</td>
+                <td>
+                    <p>Aktualisiert eine bestehende Zahlung mit der angegebenen ID. Das Format der Daten wird durch den <code>Content-Type</code>-Header bestimmt (<code>application/json</code>, <code>application/xml</code>, <code>text/csv</code>).</p>
+                </td>
+            </tr>
+            <tr>
+                <td>DELETE</td>
+                <td>/api/payment/{id}</td>
+                <td>
+                    <p>Löscht die Zahlung mit der angegebenen ID dauerhaft.</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br />
+    <h2>Beispiele für Request Body (POST)</h2>
+    <table style="width:75%; margin:auto; border-collapse: collapse" >
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th>JSON</th>
+                <th>XML</th>
+                <th>CSV</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="vertical-align: top; padding: 10px;">
+                    <pre><code class="json">{
+  "Amount": 23.50,
+  "Currency": "EUR",
+  "Receiver": "Testi GmbH"
+}</code></pre>
+                </td>
+                <td style="vertical-align: top; padding: 10px;">
+                    <pre><code class="xml">&lt;Payment&gt;
+  &lt;Amount&gt;23.50&lt;/Amount&gt;
+  &lt;Currency&gt;EUR&lt;/Currency&gt;
+  &lt;Receiver&gt;Testi GmbH&lt;/Receiver&gt;
+&lt;/Payment&gt;</code></pre>
+                </td>
+                <td style="vertical-align: top; padding: 10px;">
+                    <pre><code class="csv">Amount,Currency,Receiver
+23.50,EUR,Testi GmbH</code></pre>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+    <table id="objectDiagram">
+        <thead>
+            <tr>
+                <th>Payment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Id: int</td>
+            </tr>
+            <tr>
+                <td>Amount: decimal</td>
+            </tr>
+            <tr>
+                <td>Currency: string</td>
+            </tr>
+            <tr>
+                <td>Receiver: string</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

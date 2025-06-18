@@ -1,0 +1,24 @@
+services:
+  paymentservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5042:8080"
+    volumes:
+      - shared-secrets:/app/secrets
+    depends_on:
+      - sidecar
+
+  sidecar:
+    build:
+      context: ./Sidecar
+      dockerfile: Dockerfile
+    environment:
+      - FAKE_SECRET=fake-secret-from-sidecar-123
+      - KEYVAULT_NAME=mostWantedVault
+    volumes:
+      - shared-secrets:/secrets
+
+volumes:
+  shared-secrets:

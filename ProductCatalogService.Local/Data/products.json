@@ -1,0 +1,12 @@
+[
+  {
+    "Id": "1",
+    "Name": "Laptop Pro X1",
+    "Description": "High-performance laptop with 16GB RAM and 512GB SSD",
+    "Price": 1299.99,
+    "StockQuantity": 50,
+    "Category": "Electronics",
+    "CreatedAt": "2024-06-18T00:00:00Z",
+    "UpdatedAt": "2024-06-18T00:00:00Z"
+  }
+] 
