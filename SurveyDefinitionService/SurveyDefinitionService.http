@@ -1,0 +1,6 @@
+@SurveyDefinitionService_HostAddress = http://localhost:5029
+
+GET {{SurveyDefinitionService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

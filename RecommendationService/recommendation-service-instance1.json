@@ -4,12 +4,12 @@
     "id": "recommendation-service-01", 
     "tags": [ "mostwanted", "v1" ],
     "address": "localhost", 
-    "port": 5001,
+    "port": 5011,
     "checks": [
       {
         "id": "health-instance1",
-        "name": "HTTP Health Check on port 5001",
-        "http": "http://localhost:5001/health",
+        "name": "HTTP Health Check on port 5011",
+        "http": "http://localhost:5011/health",
         "interval": "10s",
         "timeout": "1s"
       }
